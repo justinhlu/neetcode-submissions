@@ -1,0 +1,23 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        res = []
+
+        def dfs(cur, open, close):
+            if n == open == close:
+                res.append("".join(cur.copy()))
+                return
+            
+            if close < open:
+                cur.append(")")
+                dfs(cur, open, close + 1)
+                cur.pop()
+            if open < n:
+                cur.append("(")
+                dfs(cur, open + 1, close)
+                cur.pop()
+            
+            return
+
+        dfs([],0,0)
+
+        return res
